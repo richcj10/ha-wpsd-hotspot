@@ -1,0 +1,35 @@
+name: "WPSD Hotspot Monitor"
+version: "1.1.0"
+slug: "wpsd_hotspot"
+description: "Monitor a WPSD (Pi-Star) digital-voice hotspot and publish its radio, network and activity status to Home Assistant via MQTT"
+startup: services
+boot: auto
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+
+host_network: true
+hassio_api: true
+services:
+  - mqtt:need
+
+options:
+  host: "192.168.1.176"
+  callsign: ""
+  poll_interval: 5
+  log_level: "INFO"
+
+schema:
+  host: str
+  callsign: str?
+  bm_device_id: str?
+  poll_interval: int(2,)
+  mqtt_host: str?
+  mqtt_port: port?
+  mqtt_user: str?
+  mqtt_password: password?
+  log_level: list(DEBUG|INFO|WARNING|ERROR)?
